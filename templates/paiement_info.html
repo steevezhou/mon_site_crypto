@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Paiement en attente</title>
+    <style>
+        body { font-family: sans-serif; background: #2c3e50; color: white; text-align: center; padding: 50px; }
+        .box { background: white; color: #333; display: inline-block; padding: 40px; border-radius: 20px; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        code { background: #f4f4f4; padding: 10px; display: block; margin: 20px 0; word-break: break-all; border: 1px dashed #3498db; font-size: 1.1em; color: #2c3e50; }
+        .amount { font-size: 2em; color: #e67e22; font-weight: bold; }
+        .btn-retour { display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Finalisez votre achat</h1>
+        <p>ID Commande : <br><small>{{ order_id }}</small></p>
+        <hr>
+        <p>Veuillez envoyer exactement :</p>
+        <div class="amount">{{ montant }} {{ crypto }}</div>
+        <p>À l'adresse de dépôt suivante :</p>
+        <code>{{ adresse }}</code>
+        <p style="font-size: 0.9em; color: #7f8c8d;">
+            Le système vérifie la blockchain. Dès que la transaction est confirmée, votre commande sera validée.
+        </p>
+        <a href="/" class="btn-retour">← Retour à la boutique</a>
+    </div>
+</body>
+</html>
