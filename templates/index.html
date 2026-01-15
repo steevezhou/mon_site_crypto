@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Boutique Crypto (USD)</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; padding: 40px; text-align: center; }
+        .container { display: flex; gap: 20px; justify-content: center; }
+        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); width: 280px; }
+        .price { color: #27ae60; font-size: 1.5em; font-weight: bold; margin: 15px 0; }
+        input, select, button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
+        button { background: #3498db; color: white; border: none; font-weight: bold; cursor: pointer; }
+        button:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Boutique Crypto (USD)</h1>
+    <div class="container">
+        {% for p in produits %}
+        <div class="card">
+    <h3>{{ p.nom }}</h3>
+    <p class="price">{{ p.prix_usd }} $</p>
+
+    <form action="/payer/{{ p.id }}" method="POST">
+        <input type="email" name="email" placeholder="Ton email pour le reçu" required>
+
+        <p style="font-size: 0.9em; color: #666; margin-top: 10px;">
+            Paiement accepté : <b>Litecoin (LTC) uniquement</b>
+        </p>
+        <input type="hidden" name="crypto_type" value="ltc">
+
+        <button type="submit">Acheter en LTC</button>
+    </form>
+</div>
+        {% endfor %}
+    </div>
+</body>
+</html>
