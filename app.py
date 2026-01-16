@@ -39,12 +39,20 @@ def payer(produit_id):
         "Content-Type": "application/json"
     }
 
+    # On génère l'ID de commande une seule fois pour l'utiliser partout
+    order_id = str(uuid.uuid4())
+
     payload = {
-        "price_amount": produit['prix_usd'],  # Montant en USD depuis ta base
+        "price_amount": produit['prix_usd'],
         "price_currency": "usd",
-        "pay_currency": "ltc",  # Forcé en Litecoin
-        "order_id": str(uuid.uuid4()),
-        "order_description": produit['nom']
+        "pay_currency": "ltc",
+        "order_id": order_id,
+        "order_description": produit['nom'],
+        
+        # --- LES LIGNES À AJOUTER ---
+        "ipn_callback_url": "https://ma-boutique-ltc.onrender.com/webhook",
+        "success_url": "https://ma-boutique-ltc.onrender.com/success",
+        "cancel_url": "https://ma-boutique-ltc.onrender.com/"
     }
 
     try:
@@ -85,3 +93,4 @@ def success():
 # --- LANCEMENT ---
 if __name__ == '__main__':
     app.run(debug=True)
+
